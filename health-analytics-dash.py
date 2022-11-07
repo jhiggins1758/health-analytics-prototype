@@ -77,11 +77,11 @@ with st.spinner('Updating Report...'):
     ])
 
     plot.update_layout(title_text="Target Population",
-                    title_x=0,
-                    margin= dict(l=0,r=10,b=10,t=30), 
-                    yaxis_title=None, 
-                    xaxis_title=None,
-                    plot_bgcolor='rgba(0,0,0,0)')
+                      title_x=0,
+                      margin= dict(l=0,r=10,b=10,t=30), 
+                      yaxis_title=None, 
+                      xaxis_title=None,
+                      template='seaborn')
     
     g1.plotly_chart(plot, use_container_width=True)
     
