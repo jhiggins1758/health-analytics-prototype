@@ -24,14 +24,16 @@ t2.markdown(" **Phone:** 248-XXX-XXXX **| website:** www.google.com **| email:**
 ## Data
 with st.spinner('Updating Report...'):
     
-    # Metrics setting and rendering
-    health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name = 'drug_need')
-    region = st.selectbox('Choose Region', health_df, help = 'Filter report to show only one region')
+    #Metrics setting and rendering
+    hosp_df = pd.read_excel('DataforMock.xlsx',sheet_name = 'Hospitals')
+    hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
+
+    target_pop = pd.read_csv('target_pop.csv')
+    drug_need = pd.read_csv('drug_need.csv')
     
     m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
     
-    # come back to this - fix it to work with key metrics
-    todf = pd.read_excel('DataforMock.xlsx', sheet_name = 'metrics')
+    todf = pd.read_excel('DataforMock.xlsx',sheet_name = 'metrics')
     to = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Total Outstanding')]   
     ch = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Current Handover Average Mins')]   
     hl = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Hours Lost to Handovers Over 15 Mins')]
@@ -45,19 +47,15 @@ with st.spinner('Updating Report...'):
     # Number of Completed Handovers by Hour
     g1, g2, g3 = st.columns((1,1,1))
     
-    fgdf = pd.read_excel('health-analytics-data.xlsx', sheet_name='total_pop')
+    fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
     
-    fgdf = fgdf[fgdf['Region']==region] 
+    fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
     
-    fig = px.bar(fgdf, x='Region', y='LF Lymphedema Management', template='seaborn')
+    fig = px.bar(fgdf, x = 'Arrived Destination Resolved', y='Number of Handovers', template = 'seaborn')
     
     fig.update_traces(marker_color='#264653')
     
-    fig.update_layout(title_text="Total Population of LF Lymphedema Management",
-                      title_x=0,
-                      margin= dict(l=0,r=10,b=10,t=30), 
-                      yaxis_title=None, 
-                      xaxis_title=None)
+    fig.update_layout(title_text="Number of Completed Handovers by Hour",title_x=0,margin= dict(l=0,r=10,b=10,t=30), yaxis_title=None, xaxis_title=None)
     
     g1.plotly_chart(fig, use_container_width=True) 
     
