@@ -112,18 +112,16 @@ with tab3:
 
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
-        px.set_mapbox_access_token("pk.eyJ1Ijoiam9laGlnZ2kxNzU4IiwiYSI6ImNsOWZ1NGkzZDJubnIzeGw5NHAxcjZyeDQifQ.OxUPPPmwro-Vm_58P1B3UQ")
-        fig = px.scatter_mapbox(test_df, 
-                                lat="Latitude", 
-                                lon="Longitude", 
-                                color="Total Population", 
-                                size="Total Population",
-                                color_continuous_scale=px.colors.cyclical.IceFire, 
-                                size_max=15, 
-                                zoom=5)
-        fig = fig.show()
-
-        g3.plotly_chart(fig, use_container_width=True) 
+        m = leafmap.Map(tiles="stamentoner")
+        m.add_heatmap(
+            test_df,
+            latitude="Latitude",
+            longitude="Longitude",
+            value="Total Population",
+            name="Total Population Map",
+            radius=20,
+        )
+        m.to_streamlit(height=700)
         
 # Contact Form
 with st.expander("Contact us"):
