@@ -52,7 +52,7 @@ with tab3:
         m1.write('')
         
         # Target Population
-        g1, g2 = st.columns((1.5,1.5))
+        g1, g2, g3 = st.columns((1.5,1.5,1))
         
         fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
         fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
