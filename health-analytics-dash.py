@@ -28,8 +28,8 @@ with st.spinner('Updating Report...'):
     hosp_df = pd.read_excel('DataforMock.xlsx',sheet_name = 'Hospitals')
     hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
 
-    health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name = 'drug_need')
-    region = st.selectbox('Choose Region', health_df, help = 'Filter report to show only one region')
+    health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
+    region = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
     
     m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
     
