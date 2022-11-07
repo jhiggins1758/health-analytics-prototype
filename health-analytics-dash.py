@@ -34,7 +34,7 @@ tab1, tab2, tab3 = st.tabs(["Cost", "Financing", "Disease"])
 # with tab2:
 
 with tab3:
-    ## Data
+
     with st.spinner('Updating Report...'):
         
         # Metrics setting and rendering
@@ -99,21 +99,33 @@ with tab3:
         g1.plotly_chart(plot, use_container_width=True)
         
         # Predicted Number of Arrivals
-
         fcst = pd.read_excel('DataforMock.xlsx',sheet_name = 'Forecast')
         
         fcst = fcst[fcst['Hospital Attended']==hosp]
         
         fig = px.bar(fcst, x = 'Arrived Destination Resolved', y='y', template = 'seaborn')
-        
-        fig.update_traces(marker_color='#7A9E9F')
-        
+        fig.update_traces(marker_color='#7A9E9F')        
         fig.update_layout(title_text="Predicted Number of Arrivals",title_x=0,margin= dict(l=0,r=10,b=10,t=30), yaxis_title=None, xaxis_title=None)
         
         g2.plotly_chart(fig, use_container_width=True)  
+
+        cw1 = st.columns((4.2))
+
+        # Choropleth
+        test_df = pd.read_excel(sheet_name='geo_data')
+        px.set_mapbox_access_token("pk.eyJ1Ijoiam9laGlnZ2kxNzU4IiwiYSI6ImNsOWZ1NGkzZDJubnIzeGw5NHAxcjZyeDQifQ.OxUPPPmwro-Vm_58P1B3UQ")
+        fig = px.scatter_mapbox(test_df, 
+                                lat="Latitude", 
+                                lon="Longitude", 
+                                color="Total Population", 
+                                size="Total Population",
+                                color_continuous_scale=px.colors.cyclical.IceFire, 
+                                size_max=15, 
+                                zoom=5)
+
+        cw1.plotly_chart(fig, use_container_width=True) 
         
 # Contact Form
-
 with st.expander("Contact us"):
     with st.form(key='contact', clear_on_submit=True):
         
