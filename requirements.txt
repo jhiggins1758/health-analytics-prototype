@@ -3,4 +3,4 @@ pandas
 plotly
 openpyxl
 geopy
-leaflet
+leafmap

@@ -12,7 +12,7 @@ import time
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import leaflet
+import leafmap.foliumap as leafmap
 
 # Importing partial packages
 from geopy.exc import GeocoderTimedOut
