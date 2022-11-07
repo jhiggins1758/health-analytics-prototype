@@ -52,7 +52,7 @@ with tab3:
         m1.write('')
         
         # Target Population
-        g1, g2, g3 = st.columns((1.5,1.5,1))
+        g1, g2 = st.columns((1.5,1.5))
         
         fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
         fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
@@ -104,16 +104,6 @@ with tab3:
         fig.update_layout(title_text="Predicted Number of Arrivals",title_x=0,margin= dict(l=0,r=10,b=10,t=30), yaxis_title=None, xaxis_title=None)
         
         g2.plotly_chart(fig, use_container_width=True)  
-        
-        # Average Completed Handover Duration by hour
-
-        fig = px.bar(fgdf, x = 'Arrived Destination Resolved', y='Average Duration',color = "Average Duration", template = 'seaborn', color_continuous_scale=px.colors.diverging.Temps)
-        
-        fig.add_scatter(x=fgdf['Arrived Destination Resolved'], y=fgdf['Target'], mode='lines', line=dict(color="black"), name='Target')
-        
-        fig.update_layout(title_text="Average Completed Handover Duration by hour",title_x=0,margin= dict(l=0,r=10,b=10,t=30), yaxis_title=None, xaxis_title=None, legend=dict(orientation="h",yanchor="bottom",y=0.9,xanchor="right",x=0.99))
-        
-        g3.plotly_chart(fig, use_container_width=True) 
         
         # Waiting Handovers table
         
