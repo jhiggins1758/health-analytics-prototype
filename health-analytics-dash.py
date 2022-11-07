@@ -46,7 +46,7 @@ with st.spinner('Updating Report...'):
     m1.write('')
      
     # Target Population
-    g1, g2, g3 = st.columns((2,2))
+    g1, g2, g3 = st.columns((1,1,1))
     
     fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
     fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
@@ -84,6 +84,20 @@ with st.spinner('Updating Report...'):
                       template='seaborn')
     
     g1.plotly_chart(plot, use_container_width=True)
+    
+    # Predicted Number of Arrivals
+
+    fcst = pd.read_excel('DataforMock.xlsx',sheet_name = 'Forecast')
+    
+    fcst = fcst[fcst['Hospital Attended']==hosp]
+    
+    fig = px.bar(fcst, x = 'Arrived Destination Resolved', y='y', template = 'seaborn')
+    
+    fig.update_traces(marker_color='#7A9E9F')
+    
+    fig.update_layout(title_text="Predicted Number of Arrivals",title_x=0,margin= dict(l=0,r=10,b=10,t=30), yaxis_title=None, xaxis_title=None)
+    
+    g2.plotly_chart(fig, use_container_width=True)  
     
     # Average Completed Handover Duration by hour
 
