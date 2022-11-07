@@ -10,7 +10,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-st.set_page_config(page_title='TIPAC',  layout='wide', page_icon=':ambulance:')
+st.set_page_config(page_title='TIPAC',  layout='wide', page_icon=':hospital:')
 
 # this is the header
 t1, t2 = st.columns((0.07,1)) # commented out and added the next line 
