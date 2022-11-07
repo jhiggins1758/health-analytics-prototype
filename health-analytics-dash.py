@@ -151,7 +151,7 @@ with tab3:
         cw1.plotly_chart(fig, use_container_width=True)    
         
         # Current Waiting Table
-        
+
         cwdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'CurrentWaitingCallsigns')
         
         if hosp == 'All':
@@ -181,81 +181,161 @@ with tab3:
         cw2.plotly_chart(fig, use_container_width=True)
         
     with st.spinner('Report updated!'):
-        time.sleep(1)     
+        time.sleep(1)
+
+        # Choropleth
+        # Creating a list of our regions to pass through our latitude/longitude generator function
+        main_df_output_reformat = pd.read_excel(sheet_name='disease_burden')
+        region_list = main_df_output_reformat['Regions'].unique().tolist()
+        region_df = pd.DataFrame({'City':region_list})
+        df = region_df
+
+        # declare an empty list to store
+        # latitude and longitude of values 
+        # of city column
+        longitude = []
+        latitude = []
         
-    # Performance Section  
-        
-    with st.expander("Previous Performance"):
+        # function to find the coordinate
+        # of a given city 
+        def findGeocode(city):
             
-        hhc24 = pd.read_excel('DataforMock.xlsx',sheet_name = 'HospitalHandoversCompleted')  
+            # try and catch is used to overcome
+            # the exception thrown by geolocator
+            # using geocodertimedout  
+            try:
+                
+                # Specify the user_agent as your
+                # app name it should not be none
+                geolocator = Nominatim(user_agent="your_app_name")
+                
+                return geolocator.geocode(city)
+            
+            except GeocoderTimedOut:
+                
+                return findGeocode(city)    
         
-        colourcode = []
+        # each value from city column
+        # will be fetched and sent to
+        # function find_geocode   
+        for i in (df["City"]):
+            
+            if findGeocode(i) != None:
+                
+                loc = findGeocode(i)
+                
+                # coordinates returned from 
+                # function is stored into
+                # two separate list
+                latitude.append(loc.latitude)
+                longitude.append(loc.longitude)
+            
+            # if coordinate for a city not
+            # found, insert "NaN" indicating 
+            # missing value 
+            else:
+                latitude.append(np.nan)
+                longitude.append(np.nan)
+
+        # now add this column to dataframe
+        df["Longitude"] = longitude
+        df["Latitude"] = latitude
+        region_df = df
+
+        test_df = main_df_output_reformat.merge(region_df, how='left', left_on='Regions', right_on='City') \
+                                    .drop(columns=['City'])
+        test_df = test_df[['Regions','Districts','Total Population', 'Latitude', 'Longitude']]
+        test_df = test_df.groupby(['Regions', 'Districts', 'Latitude', 'Longitude']) \
+                        .mean('Total Population') \
+                        .reset_index()
+
+        px.set_mapbox_access_token(open("/work/mapbox_API_key.txt").read())
+        fig = px.scatter_mapbox(test_df, 
+                                lat="Latitude", 
+                                lon="Longitude", 
+                                color="Total Population", 
+                                size="Total Population",
+                                color_continuous_scale=px.colors.cyclical.IceFire, 
+                                size_max=15, 
+                                zoom=5)
+
+        p1,p2 = st.columns((3, 1.7)) 
+        
+        p1.plotly_chart(fig, use_container_width=True) 
+
+    # # Performance Section  
+        
+    # with st.expander("Previous Performance"):
+            
+    #     hhc24 = pd.read_excel('DataforMock.xlsx',sheet_name = 'HospitalHandoversCompleted')  
+        
+    #     colourcode = []
                             
-        for i in range(0,13):
-            colourcode.append(hhc24['c'+str(i)].tolist())    
+    #     for i in range(0,13):
+    #         colourcode.append(hhc24['c'+str(i)].tolist())    
         
-        hhc24 = hhc24[['Hospital Attended','Handovers','In Progress','Average','Hours Lost','0 to 15 mins','15 to 30 mins','30 to 60 mins','60 to 90 mins','90 to 120 mins','120 mins','% 15 Mins','% 30 Mins']]   
+    #     hhc24 = hhc24[['Hospital Attended','Handovers','In Progress','Average','Hours Lost','0 to 15 mins','15 to 30 mins','30 to 60 mins','60 to 90 mins','90 to 120 mins','120 mins','% 15 Mins','% 30 Mins']]   
         
-        fig = go.Figure(
-                data = [go.Table (columnorder = [0,1,2,3,4,5,6,7,8,9,10,11,12], columnwidth = [18,12],
-                    header = dict(
-                    values = list(hhc24.columns),
-                    font=dict(size=11, color = 'white'),
-                    fill_color = '#264653',
-                    line_color = 'rgba(255,255,255,0.2)',
-                    align = ['left','center'],
-                    #text wrapping
-                    height=20
-                    )
-                , cells = dict(
-                    values = [hhc24[K].tolist() for K in hhc24.columns], 
-                    font=dict(size=10),
-                    align = ['left','center'],
-                    fill_color = colourcode,
-                    line_color = 'rgba(255,255,255,0.2)', 
-                    height=20))])
+    #     fig = go.Figure(
+    #             data = [go.Table (columnorder = [0,1,2,3,4,5,6,7,8,9,10,11,12], columnwidth = [18,12],
+    #                 header = dict(
+    #                 values = list(hhc24.columns),
+    #                 font=dict(size=11, color = 'white'),
+    #                 fill_color = '#264653',
+    #                 line_color = 'rgba(255,255,255,0.2)',
+    #                 align = ['left','center'],
+    #                 #text wrapping
+    #                 height=20
+    #                 )
+    #             , cells = dict(
+    #                 values = [hhc24[K].tolist() for K in hhc24.columns], 
+    #                 font=dict(size=10),
+    #                 align = ['left','center'],
+    #                 fill_color = colourcode,
+    #                 line_color = 'rgba(255,255,255,0.2)', 
+    #                 height=20))])
         
-        fig.update_layout(title_text="Hospital Handovers Completed in the Past 24 Hours",title_font_color = '#264653',title_x=0,margin= dict(l=0,r=10,b=10,t=30), height=400)                                                               
+    #     fig.update_layout(title_text="Hospital Handovers Completed in the Past 24 Hours",title_font_color = '#264653',title_x=0,margin= dict(l=0,r=10,b=10,t=30), height=400)                                                               
         
-        st.plotly_chart(fig, use_container_width=True)      
+    #     st.plotly_chart(fig, use_container_width=True)      
         
-        p1,p2 = st.columns((3, 1.7))   
+    #     p1,p2 = st.columns((3, 1.7))   
             
-        #  Current Waiting Handovers
+    #     #  Current Waiting Handovers
             
-        hhc = pd.read_excel('DataforMock.xlsx',sheet_name = 'HospitalHandoverCompletedByHour')  
+    #     hhc = pd.read_excel('DataforMock.xlsx',sheet_name = 'HospitalHandoverCompletedByHour')  
         
-        hhc = hhc[hhc['Hospital Attended']==hosp]
+    #     hhc = hhc[hhc['Hospital Attended']==hosp]
         
-        colourcode = []
+    #     colourcode = []
                                 
-        for i in range(0,13):
-            colourcode.append(hhc['c'+str(i)].tolist())    
+    #     for i in range(0,13):
+    #         colourcode.append(hhc['c'+str(i)].tolist())    
         
-        hhc = hhc[['dst','Handovers','In Progress','Average','Hours Lost','0 to 15 mins','15 to 30 mins','30 to 60 mins','60 to 90 mins','90 to 120 mins','120 mins','% 15 Mins','% 30 Mins']]
+    #     hhc = hhc[['dst','Handovers','In Progress','Average','Hours Lost','0 to 15 mins','15 to 30 mins','30 to 60 mins','60 to 90 mins','90 to 120 mins','120 mins','% 15 Mins','% 30 Mins']]
             
-        fig = go.Figure(
-                data = [go.Table (columnorder = [0,1,2,3,4,5,6,7,8,9,10,11,12], columnwidth = [18,12],
-                    header = dict(
-                    values = list(hhc.columns),
-                    font=dict(size=11, color = 'white'),
-                    fill_color = '#264653',
-                    line_color = 'rgba(255,255,255,0.2)',
-                    align = ['left','center'],
-                    #text wrapping
-                    height=20
-                    )
-                , cells = dict(
-                    values = [hhc[K].tolist() for K in hhc.columns], 
-                    font=dict(size=10),
-                    align = ['left','center'],
-                    fill_color = colourcode,
-                    line_color = 'rgba(255,255,255,0.2)',
-                    height=20))])
+    #     fig = go.Figure(
+    #             data = [go.Table (columnorder = [0,1,2,3,4,5,6,7,8,9,10,11,12], columnwidth = [18,12],
+    #                 header = dict(
+    #                 values = list(hhc.columns),
+    #                 font=dict(size=11, color = 'white'),
+    #                 fill_color = '#264653',
+    #                 line_color = 'rgba(255,255,255,0.2)',
+    #                 align = ['left','center'],
+    #                 #text wrapping
+    #                 height=20
+    #                 )
+    #             , cells = dict(
+    #                 values = [hhc[K].tolist() for K in hhc.columns], 
+    #                 font=dict(size=10),
+    #                 align = ['left','center'],
+    #                 fill_color = colourcode,
+    #                 line_color = 'rgba(255,255,255,0.2)',
+    #                 height=20))])
         
-        fig.update_layout(title_text="Hospital Handovers Completed by Hour",title_font_color = '#264653',title_x=0,margin= dict(l=0,r=10,b=10,t=30), height=600)                                                               
+    #     fig.update_layout(title_text="Hospital Handovers Completed by Hour",title_font_color = '#264653',title_x=0,margin= dict(l=0,r=10,b=10,t=30), height=600)                                                               
         
-        p1.plotly_chart(fig, use_container_width=True)  
+    #     p1.plotly_chart(fig, use_container_width=True)  
         
 
         #  Longest Completed Handovers    
