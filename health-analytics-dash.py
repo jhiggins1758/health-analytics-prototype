@@ -10,14 +10,14 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-st.set_page_config(page_title='Health Analytics Dashboard',  layout='wide', page_icon=':ambulance:')
+st.set_page_config(page_title='TIPAC',  layout='wide', page_icon=':ambulance:')
 
 # this is the header
 t1, t2 = st.columns((0.07,1)) # commented out and added the next line 
 # t2 = st.columns((1))
 
 t1.image('images/index.png', width = 120)
-t2.title("Health Analytics Dashboard")
+t2.title("Tool for Integrated Costing and Planning (TIPAC)")
 t2.markdown(" **Phone:** 248-XXX-XXXX **| website:** www.google.com **| email:** joshiggins@deloitte.com")
 
 
