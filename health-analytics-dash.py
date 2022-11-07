@@ -18,7 +18,7 @@ t1, t2 = st.columns((0.07,1)) # commented out and added the next line
 
 t1.image('images/index.png', width = 120)
 t2.title("Health Analytics Dashboard")
-t2.markdown(" **Phone:** 248-XXX-XXXX **| website:** www.google.com **| email:** mailto:joshiggins@deloitte.com **")
+t2.markdown(" **Phone:** 248-XXX-XXXX **| website:** www.google.com **| email:** joshiggins@deloitte.com")
 
 
 ## Data
