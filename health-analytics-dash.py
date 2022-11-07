@@ -109,8 +109,8 @@ with tab3:
         
         g2.plotly_chart(fig, use_container_width=True)  
 
-        cw1 = st.columns((4.2))
-
+        cw1 = st.columns((4))
+        
         # Choropleth
         test_df = pd.read_excel(sheet_name='geo_data')
         px.set_mapbox_access_token("pk.eyJ1Ijoiam9laGlnZ2kxNzU4IiwiYSI6ImNsOWZ1NGkzZDJubnIzeGw5NHAxcjZyeDQifQ.OxUPPPmwro-Vm_58P1B3UQ")
