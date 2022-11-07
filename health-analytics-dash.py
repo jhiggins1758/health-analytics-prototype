@@ -108,7 +108,7 @@ with tab3:
         
         g2.plotly_chart(fig, use_container_width=True)  
 
-        g3, g4 = st.columns(3,1)
+        g3, g4 = st.columns((3,1))
 
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
