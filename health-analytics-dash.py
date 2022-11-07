@@ -54,17 +54,36 @@ with st.spinner('Updating Report...'):
     hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
     hd_tp = hd_tp[hd_tp['Region']==region] 
     
-    fig = px.bar(hd_tp, x='Region', y='LF Lymphedema Management', template='seaborn')
+    plot = go.Figure(data=[go.Bar(
+        name = 'LF Lymphedema Management',
+        x = hd_tp['LF Lymphedema Management'],
+        y = hd_tp['District'],
+    ),
+                        go.Bar(
+        name = 'Oncho Round 1',
+        x = hd_tp['Oncho Round 1'],
+        y = hd_tp['District'],
+    ), 
+                            go.Bar(
+        name = 'SCH School Age Children',
+        x = hd_tp['SCH School Age Children'],
+        y = hd_tp['District'],
+    ), 
+                            go.Bar(
+        name = 'SCH High Risk Adult',
+        x = hd_tp['SCH High Risk Adult'],
+        y = hd_tp['District'],
+    ), 
+    ])
+
+    plot.update_layout(title_text="Target Population",
+                    title_x=0,
+                    margin= dict(l=0,r=10,b=10,t=30), 
+                    yaxis_title=None, 
+                    xaxis_title=None,
+                    plot_bgcolor='rgba(0,0,0,0)')
     
-    fig.update_traces(marker_color='#264653')
-    
-    fig.update_layout(title_text="Total Population of LF Lymphedema Management",
-                      title_x=0,
-                      margin= dict(l=0,r=10,b=10,t=30), 
-                      yaxis_title=None, 
-                      xaxis_title=None)
-    
-    g1.plotly_chart(fig, use_container_width=True) 
+    g1.plotly_chart(plot, use_container_width=True)
     
     # Predicted Number of Arrivals
     

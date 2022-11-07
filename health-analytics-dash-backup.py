@@ -30,6 +30,7 @@ with st.spinner('Updating Report...'):
 
     target_pop = pd.read_csv('target_pop.csv')
     drug_need = pd.read_csv('drug_need.csv')
+    hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
     
     m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
     
