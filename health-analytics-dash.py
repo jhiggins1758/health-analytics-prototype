@@ -25,6 +25,9 @@ t2.markdown(" **Phone:** 248-XXX-XXXX **| website:** www.google.com **| email:**
 with st.spinner('Updating Report...'):
     
     #Metrics setting and rendering
+    hosp_df = pd.read_excel('DataforMock.xlsx',sheet_name = 'Hospitals')
+    hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
+
     target_pop = pd.read_csv('target_pop.csv')
     drug_need = pd.read_csv('drug_need.csv')
     
