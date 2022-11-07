@@ -121,7 +121,7 @@ with tab3:
                                 size="Total Population",
                                 color_continuous_scale=px.colors.cyclical.IceFire, 
                                 size_max=15, 
-                                zoom=5)
+                                zoom=5).show()
 
         cw1.plotly_chart(fig, use_container_width=True) 
         
