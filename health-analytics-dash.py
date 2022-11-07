@@ -22,8 +22,11 @@ t2.markdown(" **Phone:** 248-XXX-XXXX **| Website:** www.google.com **| Email:**
 
 tab1, tab2, tab3 = st.tabs(["Cost", "Financing", "Disease"])
 
-with tab1:
+# with tab1:
 
+# with tab2:
+
+with tab3:
     ## Data
     with st.spinner('Updating Report...'):
         
