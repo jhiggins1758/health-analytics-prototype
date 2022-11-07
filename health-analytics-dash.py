@@ -65,17 +65,17 @@ with tab3:
             x = hd_tp['LF Lymphedema Management'],
             y = hd_tp['District'],
         ),
-                            go.Bar(
+                              go.Bar(
             name = 'Oncho Round 1',
             x = hd_tp['Oncho Round 1'],
             y = hd_tp['District'],
         ), 
-                                go.Bar(
+                              go.Bar(
             name = 'SCH School Age Children',
             x = hd_tp['SCH School Age Children'],
             y = hd_tp['District'],
         ), 
-                                go.Bar(
+                              go.Bar(
             name = 'SCH High Risk Adult',
             x = hd_tp['SCH High Risk Adult'],
             y = hd_tp['District'],
