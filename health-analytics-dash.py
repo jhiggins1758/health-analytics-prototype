@@ -51,7 +51,7 @@ with st.spinner('Updating Report...'):
     fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
     fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
 
-    hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='total_pop')
+    hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
     hd_tp = hd_tp[hd_tp['Region']==region] 
     
     fig = px.bar(hd_tp, x='Region', y='LF Lymphedema Management', template='seaborn')
