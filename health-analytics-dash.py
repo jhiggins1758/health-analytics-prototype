@@ -12,11 +12,11 @@ import plotly.graph_objects as go
 
 st.set_page_config(page_title='Health Analytics Dashboard',  layout='wide', page_icon=':ambulance:')
 
-#this is the header
-# t1, t2 = st.columns((0.07,1)) # commented out and added the next line 
-t2 = st.columns(1)
+# this is the header
+t1, t2 = st.columns((0.07,1)) # commented out and added the next line 
+# t2 = st.columns((1))
 
-# t1.image('images/index.png', width = 120)
+t1.image('images/index.png', width = 120)
 t2.title("Health Analytics Dashboard")
 t2.markdown(" **Phone:** 248-XXX-XXXX **| website:** www.google.com **| email:** mailto:joshiggins@deloitte.com")
 
