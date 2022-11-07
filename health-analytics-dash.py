@@ -185,7 +185,7 @@ with tab3:
 
         test_df = pd.read_excel(sheet_name='geo_data')
 
-        px.set_mapbox_access_token(open("mapbox_API_key.txt").read())
+        px.set_mapbox_access_token("pk.eyJ1Ijoiam9laGlnZ2kxNzU4IiwiYSI6ImNsOWZ1NGkzZDJubnIzeGw5NHAxcjZyeDQifQ.OxUPPPmwro-Vm_58P1B3UQ")
         fig = px.scatter_mapbox(test_df, 
                                 lat="Latitude", 
                                 lon="Longitude", 
