@@ -4,11 +4,18 @@ Created on Monday November 7th 2022
 
 @author: joshiggins
 """
+# Importing full packages
+import geopy
+import openpyxl
 import streamlit as st
 import time
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+
+# Importing partial packages
+from geopy.exc import GeocoderTimedOut
+from geopy.geocoders import Nominatim
 
 st.set_page_config(page_title='TIPAC',  layout='wide', page_icon=':hospital:')
 
