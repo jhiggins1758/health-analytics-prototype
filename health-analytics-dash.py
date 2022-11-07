@@ -62,31 +62,31 @@ with tab3:
         
         plot = go.Figure(data=[go.Bar(
             name = 'LF Lymphedema Management',
-            x = hd_tp['LF Lymphedema Management'],
-            y = hd_tp['District'],
+            y = hd_tp['LF Lymphedema Management'],
+            x = hd_tp['District'],
         ),
                               go.Bar(
             name = 'Oncho Round 1',
-            x = hd_tp['Oncho Round 1'],
-            y = hd_tp['District'],
+            y = hd_tp['Oncho Round 1'],
+            x = hd_tp['District'],
         ), 
                               go.Bar(
             name = 'SCH School Age Children',
-            x = hd_tp['SCH School Age Children'],
-            y = hd_tp['District'],
+            y = hd_tp['SCH School Age Children'],
+            x = hd_tp['District'],
         ), 
                               go.Bar(
             name = 'SCH High Risk Adult',
-            x = hd_tp['SCH High Risk Adult'],
-            y = hd_tp['District'],
+            y = hd_tp['SCH High Risk Adult'],
+            x = hd_tp['District'],
         ), 
         ])
 
         plot.update_layout(title_text="Target Population",
                         title_x=0,
                         margin= dict(l=0,r=10,b=10,t=30), 
-                        yaxis_title='District', 
-                        xaxis_title='Target Population (Total Count)',
+                        xaxis_title='District', 
+                        yaxis_title='Target Population (Total Count)',
                         template='seaborn')
         
         g1.plotly_chart(plot, use_container_width=True)
