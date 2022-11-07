@@ -46,7 +46,7 @@ with st.spinner('Updating Report...'):
     m1.write('')
      
     # Target Population
-    g1, g2, g3 = st.columns((1,1,1))
+    g1, g2, g3 = st.columns((2,2))
     
     fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
     fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
