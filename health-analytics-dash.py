@@ -25,6 +25,9 @@ t2.markdown(" **Phone:** 248-XXX-XXXX **| website:** www.google.com **| email:**
 with st.spinner('Updating Report...'):
     
     # Metrics setting and rendering
+    hosp_df = pd.read_excel('DataforMock.xlsx',sheet_name = 'Hospitals')
+    hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
+
     health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name = 'drug_need')
     region = st.selectbox('Choose Region', health_df, help = 'Filter report to show only one region')
     
@@ -45,11 +48,13 @@ with st.spinner('Updating Report...'):
     # Number of Completed Handovers by Hour
     g1, g2, g3 = st.columns((1,1,1))
     
-    fgdf = pd.read_excel('health-analytics-data.xlsx', sheet_name='total_pop')
+    fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
+    fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
+
+    hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='total_pop')
+    hd_tp = hd_tp[hd_tp['Region']==region] 
     
-    fgdf = fgdf[fgdf['Region']==region] 
-    
-    fig = px.bar(fgdf, x='Region', y='LF Lymphedema Management', template='seaborn')
+    fig = px.bar(hd_tp, x='Region', y='LF Lymphedema Management', template='seaborn')
     
     fig.update_traces(marker_color='#264653')
     
