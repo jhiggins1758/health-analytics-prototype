@@ -20,8 +20,7 @@ from geopy.geocoders import Nominatim
 st.set_page_config(page_title='TIPAC',  layout='wide', page_icon=':hospital:')
 
 # this is the header
-t1, t2 = st.columns((0.07,1)) # commented out and added the next line 
-# t2 = st.columns((1))
+t1, t2 = st.columns((0.07,1)) # commented out and added the next line
 
 t1.image('images/index.png', width = 120)
 t2.title("Tool for Integrated Costing and Planning (TIPAC)")
@@ -109,7 +108,7 @@ with tab3:
         
         g2.plotly_chart(fig, use_container_width=True)  
 
-        cw1 = st.columns(4)
+        g3, g4 = st.columns(3,1)
 
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
@@ -124,7 +123,7 @@ with tab3:
                                 zoom=5)
         fig = fig.show()
 
-        cw1.plotly_chart(fig, use_container_width=True) 
+        g3.plotly_chart(fig, use_container_width=True) 
         
 # Contact Form
 with st.expander("Contact us"):
