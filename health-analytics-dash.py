@@ -12,7 +12,6 @@ import time
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import io
 
 # Importing partial packages
 from geopy.exc import GeocoderTimedOut
@@ -184,73 +183,9 @@ with tab3:
     with st.spinner('Report updated!'):
         time.sleep(1)
 
-        # Choropleth
-        # Creating a list of our regions to pass through our latitude/longitude generator function
-        main_df_output_reformat = pd.read_excel(sheet_name='disease_burden')
-        region_list = main_df_output_reformat['Regions'].unique().tolist()
-        region_df = pd.DataFrame({'City':region_list})
-        df = region_df
+        test_df = pd.read_excel(sheet_name='geo_data')
 
-        # declare an empty list to store
-        # latitude and longitude of values 
-        # of city column
-        longitude = []
-        latitude = []
-        
-        # function to find the coordinate
-        # of a given city 
-        def findGeocode(city):
-            
-            # try and catch is used to overcome
-            # the exception thrown by geolocator
-            # using geocodertimedout  
-            try:
-                
-                # Specify the user_agent as your
-                # app name it should not be none
-                geolocator = Nominatim(user_agent="your_app_name")
-                
-                return geolocator.geocode(city)
-            
-            except GeocoderTimedOut:
-                
-                return findGeocode(city)    
-        
-        # each value from city column
-        # will be fetched and sent to
-        # function find_geocode   
-        for i in (df["City"]):
-            
-            if findGeocode(i) != None:
-                
-                loc = findGeocode(i)
-                
-                # coordinates returned from 
-                # function is stored into
-                # two separate list
-                latitude.append(loc.latitude)
-                longitude.append(loc.longitude)
-            
-            # if coordinate for a city not
-            # found, insert "NaN" indicating 
-            # missing value 
-            else:
-                latitude.append(np.nan)
-                longitude.append(np.nan)
-
-        # now add this column to dataframe
-        df["Longitude"] = longitude
-        df["Latitude"] = latitude
-        region_df = df
-
-        test_df = main_df_output_reformat.merge(region_df, how='left', left_on='Regions', right_on='City') \
-                                    .drop(columns=['City'])
-        test_df = test_df[['Regions','Districts','Total Population', 'Latitude', 'Longitude']]
-        test_df = test_df.groupby(['Regions', 'Districts', 'Latitude', 'Longitude']) \
-                        .mean('Total Population') \
-                        .reset_index()
-
-        px.set_mapbox_access_token(open("/work/mapbox_API_key.txt").read())
+        px.set_mapbox_access_token(open("mapbox_API_key.txt").read())
         fig = px.scatter_mapbox(test_df, 
                                 lat="Latitude", 
                                 lon="Longitude", 
