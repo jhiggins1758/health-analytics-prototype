@@ -98,7 +98,7 @@ with tab3:
         
         g1.plotly_chart(plot, use_container_width=True)
         
-        # Target Population Filler
+        # Predicted Number of Arrivals
         fcst = pd.read_excel('DataforMock.xlsx',sheet_name = 'Forecast')
         
         fcst = fcst[fcst['Hospital Attended']==hosp]
@@ -124,6 +124,10 @@ with tab3:
             radius=25,
         )
         m.to_streamlit(height=400)
+        
+
+        
+        
         
         
         
