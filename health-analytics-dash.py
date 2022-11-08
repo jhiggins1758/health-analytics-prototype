@@ -113,7 +113,7 @@ with tab3:
 
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
-        m = leafmap.Map(tiles="stamentoner", zoom=6)
+        m = leafmap.Map(tiles="stamentoner", center=(100, -100), zoom=6)
         m.add_heatmap(
             test_df,
             latitude="Latitude",
