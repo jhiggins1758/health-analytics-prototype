@@ -24,7 +24,7 @@ st.set_page_config(page_title='TIPAC',  layout='wide', page_icon=':hospital:')
 t1, t2 = st.columns((0.07,1)) 
 
 t1.image('images/index.png', width = 120)
-t2.title("Tool for Integrated Costing and Planning (TIPAC)")
+t2.title("Tool for Integrated Planning and Costing (TIPAC)")
 t2.markdown(" **Phone:** 248-XXX-XXXX **| Website:** www.google.com **| Email:** joshiggins@deloitte.com")
 
 tab1, tab2, tab3 = st.tabs(["Cost", "Financing", "Disease"])
