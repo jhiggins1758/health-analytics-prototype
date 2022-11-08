@@ -67,7 +67,7 @@ with tab3:
         hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
         hd_tp = hd_tp[hd_tp['Region']==region] 
         
-        plot_0 = go.Figure(data=[go.Bar(
+        plot = go.Figure(data=[go.Bar(
             name = 'LF Lymphedema Management',
             y = hd_tp['LF Lymphedema Management'],
             x = hd_tp['District'],
@@ -77,19 +77,7 @@ with tab3:
             y = hd_tp['Oncho Round 1'],
             x = hd_tp['District'],
         ), 
-        ])
-
-        plot_0.update_layout(title_text="Target Population - LF Lymphedema vs. Oncho Round 1",
-                           title_x=0,
-                           margin= dict(l=0,r=10,b=10,t=30), 
-                           xaxis_title='', 
-                           yaxis_title='Target Population (Total Count)',
-                           template='seaborn')
-        
-        g1.plotly_chart(plot_0, use_container_width=True)
-        
-        # Predicted Number of Arrivals
-        plot_1 = go.Figure(data=[go.Bar(
+                              go.Bar(
             name = 'SCH School Age Children',
             y = hd_tp['SCH School Age Children'],
             x = hd_tp['District'],
@@ -101,14 +89,25 @@ with tab3:
         ), 
         ])
 
-        plot_1.update_layout(title_text="Target Population - Adult vs. Children",
+        plot.update_layout(title_text="Target Population",
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
                            yaxis_title='Target Population (Total Count)',
                            template='seaborn')
         
-        g2.plotly_chart(plot_1, use_container_width=True)
+        g1.plotly_chart(plot, use_container_width=True)
+        
+        # Predicted Number of Arrivals
+        fcst = pd.read_excel('DataforMock.xlsx',sheet_name = 'Forecast')
+        
+        fcst = fcst[fcst['Hospital Attended']==hosp]
+        
+        fig = px.bar(fcst, x = 'Arrived Destination Resolved', y='y', template = 'seaborn')
+        fig.update_traces(marker_color='#7A9E9F')        
+        fig.update_layout(title_text="Predicted Number of Arrivals",title_x=0,margin= dict(l=0,r=10,b=10,t=30), yaxis_title=None, xaxis_title=None)
+        
+        g2.plotly_chart(fig, use_container_width=True)  
 
         g3, g4 = st.columns((3,1))
 
