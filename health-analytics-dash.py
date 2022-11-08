@@ -70,11 +70,13 @@ with tab3:
             name = 'LF Lymphedema Management',
             y = hd_tp['LF Lymphedema Management'],
             x = hd_tp['District'],
+            color = 'darkseagreen',
         ),
                               go.Bar(
             name = 'Oncho Round 1',
             y = hd_tp['Oncho Round 1'],
             x = hd_tp['District'],
+            color = 'darkslateblue'
         )
         ])
 
@@ -82,7 +84,7 @@ with tab3:
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
-                           yaxis_title='Target Population (Total Count)',
+                           yaxis_title='Target Population Count',
                            template='seaborn')
         
         g1.plotly_chart(plot, use_container_width=True)
@@ -104,7 +106,7 @@ with tab3:
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
-                           yaxis_title='Target Population (Total Count)',
+                           yaxis_title='Target Population Count',
                            template='seaborn')
 
         g2.plotly_chart(plot, use_container_width=True)
