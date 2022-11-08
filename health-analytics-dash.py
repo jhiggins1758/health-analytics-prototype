@@ -31,7 +31,26 @@ tab1, tab2, tab3 = st.tabs(["Cost", "Financing", "Disease"])
 
 # with tab1:
 
-# with tab2:
+with tab2:
+
+    with st.spinner('Updating Report...'):
+        
+        # Filtering to Region
+        health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
+        region = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
+
+        m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
+        
+        todf = pd.read_excel('DataforMock.xlsx', sheet_name = 'metrics')
+        to = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Total Outstanding')]   
+        ch = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Current Handover Average Mins')]   
+        hl = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Hours Lost to Handovers Over 15 Mins')]
+        
+        m1.write('')
+        m2.metric(label ='Total Outstanding Handovers',value = int(to['Value']), delta = str(int(to['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
+        m3.metric(label ='Current Handover Average',value = str(int(ch['Value']))+" Mins", delta = str(int(ch['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
+        m4.metric(label = 'Time Lost today (Above 15 mins)',value = str(int(hl['Value']))+" Hours", delta = str(int(hl['Previous']))+' Compared to yesterday')
+        m1.write('')
 
 with tab3:
 
