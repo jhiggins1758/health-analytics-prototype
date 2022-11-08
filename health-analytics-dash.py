@@ -113,16 +113,16 @@ with tab3:
 
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
-        m = leafmap.Map(tiles="stamentoner", zoom=10)
+        m = leafmap.Map(tiles="stamentoner", zoom=6)
         m.add_heatmap(
             test_df,
             latitude="Latitude",
             longitude="Longitude",
             value="Total Population",
             name="Total Population Map",
-            radius=20,
+            radius=25,
         )
-        m.to_streamlit(height=700)
+        m.to_streamlit(height=400)
         
 # Contact Form
 with st.expander("Contact us"):
