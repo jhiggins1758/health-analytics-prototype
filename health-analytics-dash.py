@@ -70,13 +70,13 @@ with tab3:
             name = 'LF Lymphedema Management',
             y = hd_tp['LF Lymphedema Management'],
             x = hd_tp['District'],
-            color = 'darkseagreen',
+            marker=dict(color = 'darkseagreen'),
         ),
                               go.Bar(
             name = 'Oncho Round 1',
             y = hd_tp['Oncho Round 1'],
             x = hd_tp['District'],
-            color = 'darkslateblue'
+            marker=dict(color = 'darkseagreen'),
         )
         ])
 
