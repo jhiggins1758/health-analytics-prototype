@@ -90,11 +90,11 @@ with tab3:
         ])
 
         plot.update_layout(title_text="Target Population",
-                        title_x=0,
-                        margin= dict(l=0,r=10,b=10,t=30), 
-                        xaxis_title='', 
-                        yaxis_title='Target Population (Total Count)',
-                        template='seaborn')
+                           title_x=0,
+                           margin= dict(l=0,r=10,b=10,t=30), 
+                           xaxis_title='', 
+                           yaxis_title='Target Population (Total Count)',
+                           template='seaborn')
         
         g1.plotly_chart(plot, use_container_width=True)
         
@@ -113,6 +113,7 @@ with tab3:
 
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
+        test_df = test_df[test_df['Regions']==region]
         m = leafmap.Map(tiles="stamentoner", center=(10.984335, -10.964355), zoom=6)
         m.add_heatmap(
             test_df,
