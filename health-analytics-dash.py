@@ -36,10 +36,6 @@ tab1, tab2, tab3 = st.tabs(["Cost", "Financing", "Disease"])
 with tab3:
 
     with st.spinner('Updating Report...'):
-        
-        # Metrics setting and rendering
-        hosp_df = pd.read_excel('DataforMock.xlsx',sheet_name = 'Hospitals')
-        hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
 
         health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
         region = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
@@ -60,9 +56,6 @@ with tab3:
         
         # Target Population
         g1, g2 = st.columns((1.5,1.5))
-        
-        fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
-        fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
 
         hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
         hd_tp = hd_tp[hd_tp['Region']==region] 
@@ -98,18 +91,37 @@ with tab3:
         
         g1.plotly_chart(plot, use_container_width=True)
         
-        # Predicted Number of Arrivals
-        fcst = pd.read_excel('DataforMock.xlsx',sheet_name = 'Forecast')
-        
-        fcst = fcst[fcst['Hospital Attended']==hosp]
-        
-        fig = px.bar(fcst, x = 'Arrived Destination Resolved', y='y', template = 'seaborn')
-        fig.update_traces(marker_color='#7A9E9F')        
-        fig.update_layout(title_text="Predicted Number of Arrivals",title_x=0,margin= dict(l=0,r=10,b=10,t=30), yaxis_title=None, xaxis_title=None)
-        
-        g2.plotly_chart(fig, use_container_width=True)  
+        # Target Population Filler
+        plot = go.Figure(data=[go.Bar(
+            name = 'LF Lymphedema Management',
+            y = hd_tp['LF Lymphedema Management'],
+            x = hd_tp['District'],
+        ),
+                              go.Bar(
+            name = 'Oncho Round 1',
+            y = hd_tp['Oncho Round 1'],
+            x = hd_tp['District'],
+        ), 
+                              go.Bar(
+            name = 'SCH School Age Children',
+            y = hd_tp['SCH School Age Children'],
+            x = hd_tp['District'],
+        ), 
+                              go.Bar(
+            name = 'SCH High Risk Adult',
+            y = hd_tp['SCH High Risk Adult'],
+            x = hd_tp['District'],
+        ), 
+        ])
 
-        g3, g4 = st.columns((3,1))
+        plot.update_layout(title_text="Target Population",
+                           title_x=0,
+                           margin= dict(l=0,r=10,b=10,t=30), 
+                           xaxis_title='', 
+                           yaxis_title='Target Population (Total Count)',
+                           template='seaborn')
+        
+        g2.plotly_chart(plot, use_container_width=True) 
 
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
@@ -124,18 +136,6 @@ with tab3:
             radius=25,
         )
         m.to_streamlit(height=400)
-        
-# Contact Form
-with st.expander("Contact us"):
-    with st.form(key='contact', clear_on_submit=True):
-        
-        email = st.text_input('Contact Email')
-        st.text_area("Query","Please fill in all the information or we may not be able to process your request")  
-        
-        submit_button = st.form_submit_button(label='Send Information')
-        
-        
-        
         
         
         
