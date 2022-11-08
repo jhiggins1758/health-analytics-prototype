@@ -67,7 +67,7 @@ with tab3:
         hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
         hd_tp = hd_tp[hd_tp['Region']==region] 
         
-        plot = go.Figure(data=[go.Bar(
+        plot_0 = go.Figure(data=[go.Bar(
             name = 'LF Lymphedema Management',
             y = hd_tp['LF Lymphedema Management'],
             x = hd_tp['District'],
@@ -79,17 +79,17 @@ with tab3:
         ), 
         ])
 
-        plot.update_layout(title_text="Target Population - LF Lymphedema vs. Oncho Round 1",
+        plot_0.update_layout(title_text="Target Population - LF Lymphedema vs. Oncho Round 1",
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
                            yaxis_title='Target Population (Total Count)',
                            template='seaborn')
         
-        g1.plotly_chart(plot, use_container_width=True)
+        g1.plotly_chart(plot_0, use_container_width=True)
         
         # Predicted Number of Arrivals
-        plot = go.Figure(data=[go.Bar(
+        plot_1 = go.Figure(data=[go.Bar(
             name = 'SCH School Age Children',
             y = hd_tp['SCH School Age Children'],
             x = hd_tp['District'],
@@ -101,14 +101,14 @@ with tab3:
         ), 
         ])
 
-        plot.update_layout(title_text="Target Population - Adult vs. Children",
+        plot_1.update_layout(title_text="Target Population - Adult vs. Children",
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
                            yaxis_title='Target Population (Total Count)',
                            template='seaborn')
         
-        g2.plotly_chart(plot, use_container_width=True)
+        g2.plotly_chart(plot_1, use_container_width=True)
 
         g3, g4 = st.columns((3,1))
 
