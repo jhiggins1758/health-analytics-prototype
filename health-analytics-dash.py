@@ -37,16 +37,11 @@ with tab3:
 
     with st.spinner('Updating Report...'):
         
-        # # Metrics setting and rendering
-        # hosp_df = pd.read_excel('DataforMock.xlsx',sheet_name = 'Hospitals')
-        # hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
-
+        # Filtering to Region
         health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
         region = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
         
         # m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
-        
-        # # come back to this - fix it to work with key metrics
         # todf = pd.read_excel('DataforMock.xlsx', sheet_name = 'metrics')
         # to = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Total Outstanding')]   
         # ch = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Current Handover Average Mins')]   
@@ -112,20 +107,6 @@ with tab3:
         g2.plotly_chart(plot, use_container_width=True)
 
         g3, g4 = st.columns((3,1))
-
-        # Choropleth
-        test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
-        test_df = test_df[test_df['Regions']==region]
-        m = leafmap.Map(tiles="stamentoner", center=(10.984335, -10.964355), zoom=6)
-        m.add_heatmap(
-            test_df,
-            latitude="Latitude",
-            longitude="Longitude",
-            value="Total Population",
-            name="Total Population Map",
-            radius=25,
-        )
-        m.to_streamlit(height=400)
         
 
         
