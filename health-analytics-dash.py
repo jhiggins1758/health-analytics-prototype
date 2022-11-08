@@ -37,7 +37,7 @@ with tab2:
         
         # Filtering to Region
         health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
-        region = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
+        region_1 = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
 
         m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
         
@@ -53,7 +53,7 @@ with tab3:
         
         # Filtering to Region
         health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
-        region = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
+        region_2 = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
         
         # m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
         # todf = pd.read_excel('DataforMock.xlsx', sheet_name = 'metrics')
@@ -72,7 +72,7 @@ with tab3:
         
         # Health Analytics Data - Target Population Tab Dataframe
         hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
-        hd_tp = hd_tp[hd_tp['Region']==region] 
+        hd_tp = hd_tp[hd_tp['Region']==region_2] 
         
         # Lymphedema vs. Oncho
         plot = go.Figure(data=[go.Bar(
@@ -124,7 +124,7 @@ with tab3:
         
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
-        test_df = test_df[test_df['Regions']==region]
+        test_df = test_df[test_df['Regions']==region_2]
         m = leafmap.Map(tiles="stamentoner", center=(10.984335, -10.964355), zoom=6)
         m.add_heatmap(
             test_df,
