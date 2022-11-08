@@ -37,7 +37,7 @@ with tab2:
         
         # Filtering to Region
         health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
-        region_1 = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
+        region_1 = st.selectbox('Choose Region ', health_df, help='Filter report to show only one region')
 
         m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
         
