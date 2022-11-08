@@ -61,8 +61,8 @@ with tab3:
         # Target Population
         g1, g2 = st.columns((1.5,1.5))
         
-        fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
-        fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
+        # fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
+        # fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
 
         hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
         hd_tp = hd_tp[hd_tp['Region']==region] 
