@@ -61,12 +61,11 @@ with tab3:
         # Target Population
         g1, g2 = st.columns((1.5,1.5))
         
-        # fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
-        # fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
-
+        # Health Analytics Data - Target Population Tab Dataframe
         hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
         hd_tp = hd_tp[hd_tp['Region']==region] 
         
+        # Lymphedema vs. Oncho
         plot = go.Figure(data=[go.Bar(
             name = 'LF Lymphedema Management',
             y = hd_tp['LF Lymphedema Management'],
@@ -76,8 +75,20 @@ with tab3:
             name = 'Oncho Round 1',
             y = hd_tp['Oncho Round 1'],
             x = hd_tp['District'],
-        ), 
-                              go.Bar(
+        )
+        ])
+
+        plot.update_layout(title_text="Lymphedema vs. Oncho",
+                           title_x=0,
+                           margin= dict(l=0,r=10,b=10,t=30), 
+                           xaxis_title='', 
+                           yaxis_title='Target Population (Total Count)',
+                           template='seaborn')
+        
+        g1.plotly_chart(plot, use_container_width=True)
+
+        # Adult vs. Child
+        plot = go.Figure(data=[go.Bar(
             name = 'SCH School Age Children',
             y = hd_tp['SCH School Age Children'],
             x = hd_tp['District'],
@@ -86,29 +97,17 @@ with tab3:
             name = 'SCH High Risk Adult',
             y = hd_tp['SCH High Risk Adult'],
             x = hd_tp['District'],
-        ), 
+        )
         ])
 
-        plot.update_layout(title_text="Target Population",
+        plot.update_layout(title_text="Adult vs. Child",
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
                            yaxis_title='Target Population (Total Count)',
                            template='seaborn')
-        
-        g1.plotly_chart(plot, use_container_width=True)
+
         g2.plotly_chart(plot, use_container_width=True)
-        
-        # # Predicted Number of Arrivals
-        # fcst = pd.read_excel('DataforMock.xlsx',sheet_name = 'Forecast')
-        
-        # fcst = fcst[fcst['Hospital Attended']==hosp]
-        
-        # fig = px.bar(fcst, x = 'Arrived Destination Resolved', y='y', template = 'seaborn')
-        # fig.update_traces(marker_color='#7A9E9F')        
-        # fig.update_layout(title_text="Predicted Number of Arrivals",title_x=0,margin= dict(l=0,r=10,b=10,t=30), yaxis_title=None, xaxis_title=None)
-        
-        # g2.plotly_chart(fig, use_container_width=True)  
 
         g3, g4 = st.columns((3,1))
 
