@@ -76,7 +76,7 @@ with tab3:
             name = 'Oncho Round 1',
             y = hd_tp['Oncho Round 1'],
             x = hd_tp['District'],
-            marker=dict(color = 'darkseagreen'),
+            marker=dict(color = 'darkgrey'),
         )
         ])
 
