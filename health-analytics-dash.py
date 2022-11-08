@@ -36,6 +36,10 @@ tab1, tab2, tab3 = st.tabs(["Cost", "Financing", "Disease"])
 with tab3:
 
     with st.spinner('Updating Report...'):
+        
+        # Metrics setting and rendering
+        hosp_df = pd.read_excel('DataforMock.xlsx',sheet_name = 'Hospitals')
+        hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
 
         health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
         region = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
@@ -56,6 +60,9 @@ with tab3:
         
         # Target Population
         g1, g2 = st.columns((1.5,1.5))
+        
+        fgdf = pd.read_excel('DataforMock.xlsx',sheet_name = 'Graph')
+        fgdf = fgdf[fgdf['Hospital Attended']==hosp] 
 
         hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
         hd_tp = hd_tp[hd_tp['Region']==region] 
@@ -122,6 +129,8 @@ with tab3:
                            template='seaborn')
         
         g2.plotly_chart(plot, use_container_width=True) 
+
+        g3, g4 = st.columns((3,1))
 
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
