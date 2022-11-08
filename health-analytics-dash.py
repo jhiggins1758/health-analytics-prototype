@@ -21,7 +21,7 @@ from geopy.geocoders import Nominatim
 st.set_page_config(page_title='TIPAC',  layout='wide', page_icon=':hospital:')
 
 # this is the header
-t1, t2 = st.columns((0.07,1)) # commented out and added the next line
+t1, t2 = st.columns((0.07,1)) 
 
 t1.image('images/index.png', width = 120)
 t2.title("Tool for Integrated Costing and Planning (TIPAC)")
@@ -37,26 +37,26 @@ with tab3:
 
     with st.spinner('Updating Report...'):
         
-        # Metrics setting and rendering
-        hosp_df = pd.read_excel('DataforMock.xlsx',sheet_name = 'Hospitals')
-        hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
+        # # Metrics setting and rendering
+        # hosp_df = pd.read_excel('DataforMock.xlsx',sheet_name = 'Hospitals')
+        # hosp = st.selectbox('Choose Hospital', hosp_df, help = 'Filter report to show only one hospital')
 
         health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
         region = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
         
-        m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
+        # m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
         
-        # come back to this - fix it to work with key metrics
-        todf = pd.read_excel('DataforMock.xlsx', sheet_name = 'metrics')
-        to = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Total Outstanding')]   
-        ch = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Current Handover Average Mins')]   
-        hl = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Hours Lost to Handovers Over 15 Mins')]
+        # # come back to this - fix it to work with key metrics
+        # todf = pd.read_excel('DataforMock.xlsx', sheet_name = 'metrics')
+        # to = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Total Outstanding')]   
+        # ch = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Current Handover Average Mins')]   
+        # hl = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Hours Lost to Handovers Over 15 Mins')]
         
-        m1.write('')
-        m2.metric(label ='Total Outstanding Handovers',value = int(to['Value']), delta = str(int(to['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
-        m3.metric(label ='Current Handover Average',value = str(int(ch['Value']))+" Mins", delta = str(int(ch['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
-        m4.metric(label = 'Time Lost today (Above 15 mins)',value = str(int(hl['Value']))+" Hours", delta = str(int(hl['Previous']))+' Compared to yesterday')
-        m1.write('')
+        # m1.write('')
+        # m2.metric(label ='Total Outstanding Handovers',value = int(to['Value']), delta = str(int(to['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
+        # m3.metric(label ='Current Handover Average',value = str(int(ch['Value']))+" Mins", delta = str(int(ch['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
+        # m4.metric(label = 'Time Lost today (Above 15 mins)',value = str(int(hl['Value']))+" Hours", delta = str(int(hl['Previous']))+' Compared to yesterday')
+        # m1.write('')
         
         # Target Population
         g1, g2 = st.columns((1.5,1.5))
@@ -97,17 +97,18 @@ with tab3:
                            template='seaborn')
         
         g1.plotly_chart(plot, use_container_width=True)
+        g2.plotly_chart(plot, use_container_width=True)
         
-        # Predicted Number of Arrivals
-        fcst = pd.read_excel('DataforMock.xlsx',sheet_name = 'Forecast')
+        # # Predicted Number of Arrivals
+        # fcst = pd.read_excel('DataforMock.xlsx',sheet_name = 'Forecast')
         
-        fcst = fcst[fcst['Hospital Attended']==hosp]
+        # fcst = fcst[fcst['Hospital Attended']==hosp]
         
-        fig = px.bar(fcst, x = 'Arrived Destination Resolved', y='y', template = 'seaborn')
-        fig.update_traces(marker_color='#7A9E9F')        
-        fig.update_layout(title_text="Predicted Number of Arrivals",title_x=0,margin= dict(l=0,r=10,b=10,t=30), yaxis_title=None, xaxis_title=None)
+        # fig = px.bar(fcst, x = 'Arrived Destination Resolved', y='y', template = 'seaborn')
+        # fig.update_traces(marker_color='#7A9E9F')        
+        # fig.update_layout(title_text="Predicted Number of Arrivals",title_x=0,margin= dict(l=0,r=10,b=10,t=30), yaxis_title=None, xaxis_title=None)
         
-        g2.plotly_chart(fig, use_container_width=True)  
+        # g2.plotly_chart(fig, use_container_width=True)  
 
         g3, g4 = st.columns((3,1))
 
