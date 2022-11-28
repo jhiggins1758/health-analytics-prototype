@@ -70,7 +70,7 @@ with tab2:
         
         # Filling Header Boxes In
         m1.write('')
-        m2.metric(label ='Number of Villages', value = str(nb_villages))
+        m2.metric(label ='Number of Villages', value = nb_villages)
         m3.metric(label ='Number of Schools', value = str('hello'))
         m4.metric(label ='Total Population', value = str('hello'))
         m5.write('')
