@@ -61,15 +61,19 @@ with tab2:
         health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
         region_2 = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
         
-        # Creating header boxes
+        # Creating Header Box Data
+        hd_db_0 = pd.read_excel('health-analytics-data.xlsx', sheet_name='disease_burden')
+        nb_villages = hd_db_0['Number of Villages'][hd_db_0['Regions']==region_2].max()
+        
+        # Creating Header Boxes
         m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
         
-        # Filling header boxes in
+        # Filling Header Boxes In
         m1.write('')
-        m2.metric(label ='Total Population', value = str('hello'), delta = None, delta_color = 'inverse')
-        # m3.metric(label ='Current Handover Average',value = str(int(ch['Value']))+" Mins", delta = str(int(ch['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
-        # m4.metric(label = 'Time Lost today (Above 15 mins)',value = str(int(hl['Value']))+" Hours", delta = str(int(hl['Previous']))+' Compared to yesterday')
-        # m1.write('')
+        m2.metric(label ='Number of Villages', value = str(nb_villages + 'Villages'))
+        m3.metric(label ='Number of Schools', value = str('hello'))
+        m4.metric(label ='Total Population', value = str('hello'))
+        m5.write('')
         
         # Target Population
         g1, g2 = st.columns((1.5,1.5))
