@@ -13,10 +13,16 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import leafmap.foliumap as leafmap
+import pyodbc
 
 # Importing partial packages
 from geopy.exc import GeocoderTimedOut
 from geopy.geocoders import Nominatim
+
+# Defining database connection
+# conn = pyodbc.connect('Driver={SQL Server};' 'Server=hackathon.spdns.org;' 'Database=GlobalHealth;' 'Trusted_Connection=no;' 'uid=ServiceStreamlit;' 'pwd=Hack1234;')
+# health_analytics_query = 'SELECT * FROM Data.HealthAnalytics'
+# health_df = pd.read_sql(health_analytics_query, conn)
 
 st.set_page_config(page_title='TIPAC',  layout='wide', page_icon=':hospital:')
 
