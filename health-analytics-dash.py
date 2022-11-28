@@ -42,7 +42,7 @@ with tab2:
         m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
         
         m1.write('')
-        m2.metric(label ='Total Current Spend',value = str('$10M'), delta = str('$5M')+' more compared to last month', delta_color = 'inverse')
+        m2.metric(label='Total Current Spend', value = str('$10M'), delta = str('$5M')+' more compared to last month', delta_color = 'inverse')
         # m3.metric(label ='Current Handover Average',value = str(int(ch['Value']))+" Mins", delta = str(int(ch['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
         # m4.metric(label = 'Time Lost today (Above 15 mins)',value = str(int(hl['Value']))+" Hours", delta = str(int(hl['Previous']))+' Compared to yesterday')
         m1.write('')
