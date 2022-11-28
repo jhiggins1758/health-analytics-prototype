@@ -43,8 +43,10 @@ with tab1:
         health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
         region_1 = st.selectbox('Choose Region ', health_df, help='Filter report to show only one region')
 
+        # Creating header boxes
         m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
         
+        # Filling header boxes in
         m1.write('')
         m2.metric(label='Total Current Spend', value = str('$10M'), delta = str('$5M')+' more compared to last month', delta_color = 'inverse')
         # m3.metric(label ='Current Handover Average',value = str(int(ch['Value']))+" Mins", delta = str(int(ch['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
@@ -59,14 +61,12 @@ with tab2:
         health_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='regions')
         region_2 = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
         
-        # m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
-        # todf = pd.read_excel('DataforMock.xlsx', sheet_name = 'metrics')
-        # to = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Total Outstanding')]   
-        # ch = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Current Handover Average Mins')]   
-        # hl = todf[(todf['Hospital Attended']==hosp) & (todf['Metric']== 'Hours Lost to Handovers Over 15 Mins')]
+        # Creating header boxes
+        m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
         
-        # m1.write('')
-        # m2.metric(label ='Total Outstanding Handovers',value = int(to['Value']), delta = str(int(to['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
+        # Filling header boxes in
+        m1.write('')
+        m2.metric(label ='Total Population', value = str('hello'), delta = None, delta_color = 'inverse')
         # m3.metric(label ='Current Handover Average',value = str(int(ch['Value']))+" Mins", delta = str(int(ch['Previous']))+' Compared to 1 hour ago', delta_color = 'inverse')
         # m4.metric(label = 'Time Lost today (Above 15 mins)',value = str(int(hl['Value']))+" Hours", delta = str(int(hl['Previous']))+' Compared to yesterday')
         # m1.write('')
@@ -76,7 +76,7 @@ with tab2:
         
         # Health Analytics Data - Target Population Tab Dataframe
         hd_tp = pd.read_excel('health-analytics-data.xlsx', sheet_name='target_pop')
-        hd_tp = hd_tp[hd_tp['Region']==region_2] 
+        hd_tp = hd_tp[hd_tp['Region']==region_2]
         
         # Lymphedema vs. Oncho
         plot = go.Figure(data=[go.Bar(
@@ -124,7 +124,21 @@ with tab2:
 
         g2.plotly_chart(plot, use_container_width=True)
 
+        
+        # Five-year projection of medicine
         g3, g4 = st.columns((3,1))
+
+        # Health Analytics Data - Disease Burden Tab Dataframe
+        hd_db_1 = pd.read_excel('health-analytics-data.xlsx', sheet_name='disease_burden_1')
+        hd_db_1 = hd_db_1[hd_db_1['Region'] == region_2]
+
+        # Five-year projection of medicine
+        fig = px.line(hd_db_1, y="Disease Burden", x="Year", color='Disease Type')
+
+        g3.plotly_chart(fig, use_container_width=True)
+
+        # Choropleth
+        g5, g6 = st.columns((3,1))
         
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
