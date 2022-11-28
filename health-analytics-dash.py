@@ -33,11 +33,9 @@ t1.image('images/index.png', width = 120)
 t2.title("Tool for Integrated Planning and Costing (TIPAC)")
 # t2.markdown(" **Phone:** 248-XXX-XXXX **| Website:** www.google.com **| Email:** joshiggins@deloitte.com")
 
-tab1, tab2, tab3 = st.tabs(["Cost", "Financing", "Disease"])
+tab1, tab2 = st.tabs(["Financing", "Disease"])
 
-# with tab1:
-
-with tab2:
+with tab1:
 
     with st.spinner('Updating Report...'):
         
@@ -53,7 +51,7 @@ with tab2:
         # m4.metric(label = 'Time Lost today (Above 15 mins)',value = str(int(hl['Value']))+" Hours", delta = str(int(hl['Previous']))+' Compared to yesterday')
         m1.write('')
 
-with tab3:
+with tab2:
 
     with st.spinner('Updating Report...'):
         
