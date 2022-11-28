@@ -73,8 +73,8 @@ with tab2:
         # Filling Header Boxes In
         m1.write('')
         m2.metric(label ='Number of Villages', value = nb_villages)
-        m3.metric(label ='Number of Schools', value = str('hello'))
-        m4.metric(label ='Total Population', value = str('hello'))
+        m3.metric(label ='Number of Schools', value = nb_schools)
+        m4.metric(label ='Total Population', value = total_population)
         m5.write('')
         
         # Target Population
