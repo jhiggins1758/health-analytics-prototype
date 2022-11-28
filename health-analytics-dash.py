@@ -133,19 +133,19 @@ with tab2:
         hd_db_1 = hd_db_1[hd_db_1['Regions'] == region_2]
 
         # LF Disease Burden
-        hd_lf_db = hd_db_1[hd_db_1['Disease Type']=='LF Disease Burden']
+        hd_lf_db = hd_db_1[hd_db_1['Disease Type']=='LF Disease Burden Code']
 
         # Oncho Disease Burden
-        hd_on_db = hd_db_1[hd_db_1['Disease Type']=='Oncho Disease Burden']
+        hd_on_db = hd_db_1[hd_db_1['Disease Type']=='Oncho Disease Burden Code']
 
         # SCH Disease Burden
-        hd_sch_db = hd_db_1[hd_db_1['Disease Type']=='SCH Disease Burden']
+        hd_sch_db = hd_db_1[hd_db_1['Disease Type']=='SCH Disease Burden Code']
         
         # STH Disease Burden
-        hd_sth_db = hd_db_1[hd_db_1['Disease Type']=='STH Disease Burden']
+        hd_sth_db = hd_db_1[hd_db_1['Disease Type']=='STH Disease Burden Code']
 
         # Trachoma Disease Burden
-        hd_tra_db = hd_db_1[hd_db_1['Disease Type']=='Trachoma Disease Burden']
+        hd_tra_db = hd_db_1[hd_db_1['Disease Type']=='Trachoma Disease Burden Code']
 
         # Five-year projection of medicine
         # LF Disease Burden
