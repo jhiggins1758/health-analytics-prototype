@@ -124,10 +124,27 @@ with tab2:
 
         g2.plotly_chart(plot, use_container_width=True)
 
+        # Choropleth
+        g3, g4 = st.columns((3,1))
+        
+        # Choropleth
+        test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
+        test_df = test_df[test_df['Regions']==region_2]
+        m = leafmap.Map(tiles="stamentoner", center=(10.984335, -10.964355), zoom=6)
+        m.add_heatmap(
+            test_df,
+            latitude="Latitude",
+            longitude="Longitude",
+            value="Total Population",
+            name="Total Population Map",
+            radius=25,
+        )
+        m.to_streamlit(height=400)
+
     with st.expander("Five Year Projection of Medicine Need"):
 
         # Five-year projection of medicine
-        g3, g4, g5  = st.columns((1.33, 1.33, 1.33))
+        g5, g6, g7  = st.columns((1.33, 1.33, 1.33))
 
         # Health Analytics Data - Disease Burden Tab Dataframe
         hd_db_1 = pd.read_excel('health-analytics-data.xlsx', sheet_name='disease_burden_1')
@@ -159,7 +176,7 @@ with tab2:
                            yaxis_title='Target Population Count',
                            template='seaborn')
 
-        g3.plotly_chart(fig, use_container_width=True)
+        g5.plotly_chart(fig, use_container_width=True)
 
         # Oncho Disease Burden
         fig = px.line(hd_on_db, y="Disease Burden", x="Year", color='Districts')
@@ -171,7 +188,7 @@ with tab2:
                            yaxis_title='Target Population Count',
                            template='seaborn')
 
-        g4.plotly_chart(fig, use_container_width=True)
+        g6.plotly_chart(fig, use_container_width=True)
 
         # SCH Disease Burden
         fig = px.line(hd_sch_db, y="Disease Burden", x="Year", color='Districts')
@@ -183,10 +200,10 @@ with tab2:
                            yaxis_title='Target Population Count',
                            template='seaborn')
 
-        g5.plotly_chart(fig, use_container_width=True)
+        g7.plotly_chart(fig, use_container_width=True)
 
         # Five-year projection of medicine - continued
-        g6, g7  = st.columns((1.5, 1.5))
+        g8, g9  = st.columns((1.5, 1.5))
 
         # STH Disease Burden
         fig = px.line(hd_sth_db, y="Disease Burden", x="Year", color='Districts')
@@ -198,7 +215,7 @@ with tab2:
                            yaxis_title='Target Population Count',
                            template='seaborn')
 
-        g6.plotly_chart(fig, use_container_width=True)
+        g8.plotly_chart(fig, use_container_width=True)
 
         # Trachoma Disease Burden
         fig = px.line(hd_tra_db, y="Disease Burden", x="Year", color='Districts')
@@ -210,21 +227,4 @@ with tab2:
                            yaxis_title='Target Population Count',
                            template='seaborn')
 
-        g7.plotly_chart(fig, use_container_width=True)
-
-        # Choropleth
-        g8, g9 = st.columns((3,1))
-        
-        # Choropleth
-        test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
-        test_df = test_df[test_df['Regions']==region_2]
-        m = leafmap.Map(tiles="stamentoner", center=(10.984335, -10.964355), zoom=6)
-        m.add_heatmap(
-            test_df,
-            latitude="Latitude",
-            longitude="Longitude",
-            value="Total Population",
-            name="Total Population Map",
-            radius=25,
-        )
-        m.to_streamlit(height=400)
+        g9.plotly_chart(fig, use_container_width=True)
