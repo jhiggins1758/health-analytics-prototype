@@ -62,8 +62,10 @@ with tab2:
         region_2 = st.selectbox('Choose Region', health_df, help='Filter report to show only one region')
         
         # Creating Header Box Data
-        hd_db_0 = pd.read_excel('health-analytics-data.xlsx', sheet_name='disease_burden')
+        hd_db_0 = pd.read_excel('health-analytics-data.xlsx', sheet_name='disease_burden_1')
         nb_villages = hd_db_0['Number of Villages'][hd_db_0['Regions']==region_2].max()
+        nb_schools = hd_db_0['Number of Schools'][hd_db_0['Regions']==region_2].max()
+        total_population = hd_db_0['Total Population'][hd_db_0['Regions']==region_2].max()
         
         # Creating Header Boxes
         m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
