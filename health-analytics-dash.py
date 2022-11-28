@@ -130,7 +130,7 @@ with tab2:
 
         # Health Analytics Data - Disease Burden Tab Dataframe
         hd_db_1 = pd.read_excel('health-analytics-data.xlsx', sheet_name='disease_burden_1')
-        hd_db_1 = hd_db_1[hd_db_1['Region'] == region_2]
+        hd_db_1 = hd_db_1[hd_db_1['Regions'] == region_2]
 
         # Five-year projection of medicine
         fig = px.line(hd_db_1, y="Disease Burden", x="Year", color='Disease Type')
