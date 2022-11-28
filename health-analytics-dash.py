@@ -126,19 +126,93 @@ with tab2:
 
         
         # Five-year projection of medicine
-        g3, g4 = st.columns((3,1))
+        g3, g4, g5  = st.columns((1.33, 1.33, 1.33))
 
         # Health Analytics Data - Disease Burden Tab Dataframe
         hd_db_1 = pd.read_excel('health-analytics-data.xlsx', sheet_name='disease_burden_1')
         hd_db_1 = hd_db_1[hd_db_1['Regions'] == region_2]
 
+        # LF Disease Burden
+        hd_lf_db = hd_db_1[hd_db_1['Disease Type']=='LF Disease Burden']
+
+        # Oncho Disease Burden
+        hd_on_db = hd_db_1[hd_db_1['Disease Type']=='Oncho Disease Burden']
+
+        # SCH Disease Burden
+        hd_sch_db = hd_db_1[hd_db_1['Disease Type']=='SCH Disease Burden']
+        
+        # STH Disease Burden
+        hd_sth_db = hd_db_1[hd_db_1['Disease Type']=='STH Disease Burden']
+
+        # Trachoma Disease Burden
+        hd_tra_db = hd_db_1[hd_db_1['Disease Type']=='Trachoma Disease Burden']
+
         # Five-year projection of medicine
-        fig = px.line(hd_db_1, y="Disease Burden", x="Year", color='Disease Type')
+        # LF Disease Burden
+        fig = px.line(hd_lf_db, y="Disease Burden", x="Year", color='Districts')
+        
+        fig.update_layout(title_text="LF Disease Burden",
+                           title_x=0,
+                           margin= dict(l=0,r=10,b=10,t=30), 
+                           xaxis_title='', 
+                           yaxis_title='Target Population Count',
+                           template='seaborn')
 
         g3.plotly_chart(fig, use_container_width=True)
 
+        # Oncho Disease Burden
+        fig = px.line(hd_on_db, y="Disease Burden", x="Year", color='Districts')
+        
+        fig.update_layout(title_text="Oncho Disease Burden",
+                           title_x=0,
+                           margin= dict(l=0,r=10,b=10,t=30), 
+                           xaxis_title='', 
+                           yaxis_title='Target Population Count',
+                           template='seaborn')
+
+        g4.plotly_chart(fig, use_container_width=True)
+
+        # SCH Disease Burden
+        fig = px.line(hd_sch_db, y="Disease Burden", x="Year", color='Districts')
+        
+        fig.update_layout(title_text="SCH Disease Burden",
+                           title_x=0,
+                           margin= dict(l=0,r=10,b=10,t=30), 
+                           xaxis_title='', 
+                           yaxis_title='Target Population Count',
+                           template='seaborn')
+
+        g5.plotly_chart(fig, use_container_width=True)
+
+        # Five-year projection of medicine - continued
+        g6, g7  = st.columns((1.5, 1.5))
+
+        # STH Disease Burden
+        fig = px.line(hd_sth_db, y="Disease Burden", x="Year", color='Districts')
+        
+        fig.update_layout(title_text="STH Disease Burden",
+                           title_x=0,
+                           margin= dict(l=0,r=10,b=10,t=30), 
+                           xaxis_title='', 
+                           yaxis_title='Target Population Count',
+                           template='seaborn')
+
+        g6.plotly_chart(fig, use_container_width=True)
+
+        # Trachoma Disease Burden
+        fig = px.line(hd_tra_db, y="Disease Burden", x="Year", color='Districts')
+        
+        fig.update_layout(title_text="Trachoma Disease Burden",
+                           title_x=0,
+                           margin= dict(l=0,r=10,b=10,t=30), 
+                           xaxis_title='', 
+                           yaxis_title='Target Population Count',
+                           template='seaborn')
+
+        g7.plotly_chart(fig, use_container_width=True)
+
         # Choropleth
-        g5, g6 = st.columns((3,1))
+        g8, g9 = st.columns((3,1))
         
         # Choropleth
         test_df = pd.read_excel('health-analytics-data.xlsx', sheet_name='geo_data')
