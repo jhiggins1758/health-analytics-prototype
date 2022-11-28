@@ -124,7 +124,8 @@ with tab2:
 
         g2.plotly_chart(plot, use_container_width=True)
 
-        
+    with st.expander("Five Year Projection of Medicine Need"):
+
         # Five-year projection of medicine
         g3, g4, g5  = st.columns((1.33, 1.33, 1.33))
 
