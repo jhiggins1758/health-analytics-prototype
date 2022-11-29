@@ -66,6 +66,7 @@ with tab2:
         nb_villages = hd_db_0['Number of Villages'][hd_db_0['Regions']==region_2].max()
         nb_schools = hd_db_0['Number of Schools'][hd_db_0['Regions']==region_2].max()
         total_population = int(hd_db_0['Total Population'][hd_db_0['Regions']==region_2].max())
+        total_population = f"{total_population:,}"
         
         # Creating Header Boxes
         m1, m2, m3, m4, m5 = st.columns((1,1,1,1,1))
