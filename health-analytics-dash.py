@@ -31,7 +31,7 @@ t1, t2 = st.columns((0.07,1))
 
 t1.image('images/index.png', width = 120)
 t2.title("Tool for Integrated Planning and Costing")
-t2.markdown("TIPAC")
+# t2.markdown("TIPAC")
 
 tab1, tab2 = st.tabs(["Financing", "Disease"])
 
