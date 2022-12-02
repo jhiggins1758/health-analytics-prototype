@@ -176,11 +176,11 @@ with tab2:
         # LF Disease Burden
         fig = px.line(hd_lf_db, y="Disease Burden", x="Year", color='Districts')
         
-        fig.update_layout(title_text="LF Disease Burden",
+        fig.update_layout(title_text="Albendazole, Diethylcarbamazine, Ivermectin",
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
-                           yaxis_title='Target Population Count',
+                           yaxis_title='Medicine Need',
                            template='seaborn')
 
         g5.plotly_chart(fig, use_container_width=True)
@@ -188,11 +188,11 @@ with tab2:
         # Oncho Disease Burden
         fig = px.line(hd_on_db, y="Disease Burden", x="Year", color='Districts')
         
-        fig.update_layout(title_text="Oncho Disease Burden",
+        fig.update_layout(title_text="Ivermectin, Doxycycline",
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
-                           yaxis_title='Target Population Count',
+                           yaxis_title='Medicine Need',
                            template='seaborn')
 
         g6.plotly_chart(fig, use_container_width=True)
@@ -200,11 +200,11 @@ with tab2:
         # SCH Disease Burden
         fig = px.line(hd_sch_db, y="Disease Burden", x="Year", color='Districts')
         
-        fig.update_layout(title_text="SCH Disease Burden",
+        fig.update_layout(title_text="Praziquantel, PZQ",
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
-                           yaxis_title='Target Population Count',
+                           yaxis_title='Medicine Need',
                            template='seaborn')
 
         g7.plotly_chart(fig, use_container_width=True)
@@ -215,11 +215,11 @@ with tab2:
         # STH Disease Burden
         fig = px.line(hd_sth_db, y="Disease Burden", x="Year", color='Districts')
         
-        fig.update_layout(title_text="STH Disease Burden",
+        fig.update_layout(title_text="Albendazole, Mebendazole",
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
-                           yaxis_title='Target Population Count',
+                           yaxis_title='Medicine Need',
                            template='seaborn')
 
         g8.plotly_chart(fig, use_container_width=True)
@@ -227,11 +227,11 @@ with tab2:
         # Trachoma Disease Burden
         fig = px.line(hd_tra_db, y="Disease Burden", x="Year", color='Districts')
         
-        fig.update_layout(title_text="Trachoma Disease Burden",
+        fig.update_layout(title_text="Azithromycin, Tetracycline",
                            title_x=0,
                            margin= dict(l=0,r=10,b=10,t=30), 
                            xaxis_title='', 
-                           yaxis_title='Target Population Count',
+                           yaxis_title='Medicine Need',
                            template='seaborn')
 
         g9.plotly_chart(fig, use_container_width=True)
