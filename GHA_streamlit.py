@@ -2,23 +2,22 @@
 """
 Created on Monday November 7th 2022
 
-@author: higgins, joey
-@author: bolton, charet
+@author: joshiggins
 """
+import geopy
+import openpyxl
 import streamlit as st
+import time
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import openpyxl
-import geopy
 import leafmap.foliumap as leafmap
-import pyodbc
-import time
+from st_aggrid import GridOptionsBuilder, AgGrid, JsCode
 import re
+# import pyodbc
 
 # Importing partial packagesfrom geopy.exc import GeocoderTimedOut
-from geopy.geocoders import Nominatim
-from st_aggrid import GridOptionsBuilder, AgGrid, JsCode
+# from geopy.geocoders import Nominatim
 
 # Read in Data
 activity_fin = pd.read_excel('FINAL Guinea TIPAC Hackathon Data Set.xlsx', 
