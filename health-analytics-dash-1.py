@@ -18,7 +18,7 @@ import re
 
 # Importing partial packagesfrom geopy.exc import GeocoderTimedOut
 from geopy.geocoders import Nominatim
-from st_aggrid import GridOptionsBuilder, AgGrid, JsCode
+from streamlit-aggrid import GridOptionsBuilder, AgGrid, JsCode
 
 # Read in Data
 activity_fin = pd.read_excel('FINAL Guinea TIPAC Hackathon Data Set.xlsx', 
