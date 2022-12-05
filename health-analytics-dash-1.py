@@ -21,8 +21,7 @@ from geopy.geocoders import Nominatim
 # from st_aggrid import GridOptionsBuilder, AgGrid, JsCode
 
 # Read in Data
-activity_fin = pd.read_excel('FINAL Guinea TIPAC Hackathon Data Set.xlsx', 
-             sheet_name = 'Financing of Activities')
+activity_fin = pd.read_excel('FINAL Guinea TIPAC Hackathon Data Set.xlsx', sheet_name = 'Financing of Activities')
 activity_fin = activity_fin.rename(columns={'Amount of Finance Recevied': 'Amount of Finance Received'})
 activity_fin.head()
 
