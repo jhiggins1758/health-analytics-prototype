@@ -7,4 +7,3 @@ leafmap
 pyodbc
 time
 re
-streamlit-aggrid
